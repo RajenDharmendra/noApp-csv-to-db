@@ -22,6 +22,7 @@ const FileUpload = ({
   // Define the state variables for the component
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Create a ref for the file input element
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -106,6 +107,8 @@ const FileUpload = ({
       return;
     }
 
+    setLoading(true);
+
     // Initialize FormData object to store the data
     const formData = new FormData();
 
@@ -138,7 +141,7 @@ const FileUpload = ({
           setTimeout(() => {
             setUploadProgress(0);
             fileInputRef.current!.value = "";
-          }, 3000);
+          }, 2000);
         },
       });
 
@@ -155,13 +158,27 @@ const FileUpload = ({
         message: error?.response?.data?.message,
       });
       //   alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="z-100">
       <h1 className="text-center text-2xl mb-4 font-thin">Upload a CSV</h1>
+
       <div className="">
+        {loading && (
+          <div className="flex flex-col">
+            <div className="flex justify-center items-center">
+              <div className="border-4 border-solid border-opacity-70 border-blue-500 rounded-full w-12 h-12 animate-pulse opacity-100 duration-300"></div>
+            </div>
+            <div className="text-sm flex text-gray-500 mt-1 justify-center items-center">
+              Processing...
+            </div>
+          </div>
+        )}
+
         <div className="text-sm text-gray-500 mt-1">Progress</div>
         <div className="mt-1 relative h-2 rounded-full bg-gray-300 mb-4">
           <div
