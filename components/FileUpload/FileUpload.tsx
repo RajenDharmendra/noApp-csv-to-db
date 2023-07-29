@@ -3,10 +3,6 @@ import axios, { AxiosResponse } from "axios";
 
 // Define the props type for the component
 interface FileUploadProps {
-  responseMessage: {
-    status: string;
-    message: string;
-  };
   setResponseMessage: React.Dispatch<
     React.SetStateAction<{
       status: string;
@@ -15,10 +11,7 @@ interface FileUploadProps {
   >;
 }
 
-const FileUpload = ({
-  responseMessage,
-  setResponseMessage,
-}: FileUploadProps) => {
+const FileUpload = ({ setResponseMessage }: FileUploadProps) => {
   // Define the state variables for the component
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
@@ -189,14 +182,14 @@ const FileUpload = ({
 
         <input
           ref={fileInputRef}
-          className="rounded-lg bg-white opacity-50 rounded-r-none  test-sm  duration-300 file:px-2 file:py-1 file:rounded-lg file:bg-gray-800 file:text-white file:opacity-100 file:rounded-r-none file:hover:bg-gray-600 file:duration-300 file:cursor-pointer"
+          className="rounded-lg bg-white opacity-50  sm:rounded-r-none test-sm  duration-300 file:px-2 file:py-1 file:rounded-lg file:bg-gray-800 file:text-white file:opacity-100 file:rounded-r-none file:hover:bg-gray-600 file:duration-300 file:cursor-pointer"
           type="file"
           accept=".csv"
           onChange={onFileChange}
         />
         <button
           onClick={onFileUpload}
-          className="rounded-lg bg-gray-800 px-4 py-1.5 text-white test-sm hover:bg-gray-600 duration-300 rounded-l-none"
+          className="rounded-lg bg-gray-800 px-4 py-1.5 text-white hover:bg-gray-600 duration-300 sm:rounded-l-none mt-2 sm:mt-0"
         >
           Upload
         </button>
