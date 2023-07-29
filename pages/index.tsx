@@ -7,7 +7,6 @@ import Dialog from "@/components/Dialog/Dialog";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [responseMessage, setResponseMessage] = useState({
     status: "",
     message: "",
@@ -24,11 +23,7 @@ export default function Home() {
 
       <div className="relative flex place-items-center before:absolute before:h-[300px]  before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:lg:h-[360px]">
         {/* File upload component */}
-        <FileUpload
-          setIsDialogVisible={setIsDialogVisible}
-          isDialogVisible={isDialogVisible}
-          setResponseMessage={setResponseMessage}
-        />
+        <FileUpload setResponseMessage={setResponseMessage} />
       </div>
 
       {/* Dialog */}
@@ -38,7 +33,6 @@ export default function Home() {
             status={responseMessage.status}
             message={responseMessage.message}
             onClose={() => {
-              setIsDialogVisible(false);
               setResponseMessage({
                 status: "",
                 message: "",
