@@ -129,12 +129,6 @@ const FileUpload = ({ setResponseMessage }: FileUploadProps) => {
           );
           // Update the progress bar
           setUploadProgress(progress);
-          // Reset the progress bar after 5 seconds
-
-          setTimeout(() => {
-            setUploadProgress(0);
-            fileInputRef.current!.value = "";
-          }, 2000);
         },
       });
 
@@ -152,8 +146,22 @@ const FileUpload = ({ setResponseMessage }: FileUploadProps) => {
       });
       //   alert("Something went wrong. Please try again.");
     } finally {
+      // Reset the state variables
+
+      setUploadProgress(0);
+      setSelectedFile(null);
+      fileInputRef.current!.value = "";
       setLoading(false);
     }
+  };
+
+  const reset = () => {
+    setSelectedFile(null);
+    fileInputRef.current!.value = "";
+    setResponseMessage({
+      status: "",
+      message: "",
+    });
   };
 
   return (
