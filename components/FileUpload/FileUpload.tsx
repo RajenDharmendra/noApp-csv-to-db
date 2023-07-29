@@ -157,7 +157,7 @@ const FileUpload = ({ setResponseMessage }: FileUploadProps) => {
   };
 
   return (
-    <div className="z-100">
+    <div className="z-100 ">
       <h1 className="text-center text-2xl mb-4 font-thin">Upload a CSV</h1>
 
       <div className="">
