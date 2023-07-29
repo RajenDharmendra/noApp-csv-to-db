@@ -44,12 +44,13 @@ const uploadFile = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     });
 
     // Save the data to the database
-    await usersCollection.insertMany(obj);
+    const saveToDb = await usersCollection.insertMany(obj);
+    console.log(saveToDb);
     // throw new Error("Invalid CSV format");
     // Send the response
     res.status(200).json({
       status: "success",
-      message: "Data successfully saved to database",
+      message: `A total of ${saveToDb.insertedCount} users have been successfully added to the database`,
     });
   } catch (error) {
     // Send the error message
